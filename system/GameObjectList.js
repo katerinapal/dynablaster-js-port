@@ -30,7 +30,7 @@ define([], function(){
 	    		{
 	    		this.gameObjects.splice(i, 1);
 	    		gameobject.parent = null;
-				delete (gameobject);
+				gameobject = undefined;
 				return;
 				}
 		};

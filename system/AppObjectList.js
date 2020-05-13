@@ -58,7 +58,7 @@ define([], function(){
 	    		{
 	    		this.grid.splice(i, 1);
 	    		obj.parent = null;
-				delete (obj);
+				obj = undefined;
 				return;
 				}
 		};

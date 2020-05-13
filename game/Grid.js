@@ -45,7 +45,7 @@ define(['game/Tile', 'system/Canvas', 'system/Sprites', 'system/Vector2'], funct
 	Grid.prototype.clearAll = function () {
 		for (var i in this.tiles)
 		{
-			if (typeof this.tiles[i] !== "undefined") delete this.tiles[i];
+			if (typeof this.tiles[i] !== "undefined") this.tiles[i] = undefined;
 		}
 	};
 
@@ -63,7 +63,7 @@ define(['game/Tile', 'system/Canvas', 'system/Sprites', 'system/Vector2'], funct
 
 	Grid.prototype.remove = function (x,y) {
 		this.grid[y * this.cols + x] = undefined;
-		delete this.tiles[y * this.cols + x];
+		
 		this.count--;
 		this.removeFromPfGrid(x,y);
 	};

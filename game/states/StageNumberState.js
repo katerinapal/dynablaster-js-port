@@ -54,9 +54,9 @@ define(['system/myHelper', 'game/GamePlayer', 'game/Bonus', 'game/DashBoard', 'g
         var bricksCount = mapSize.x * mapSize.y / 5;
 
         if (bricksCount < bonuses) bricksCount = bonuses;
-        delete this.game.bonus;
-        delete this.game.dashboard;
-        delete this.game.map;
+        this.game.bonus = undefined;
+        this.game.dashboard = undefined;
+        this.game.map = undefined;
 
  		this.game.bonus = new Bonus(this.game.gamePlayer, bonuses);
   		this.game.dashboard = new DashBoard();
