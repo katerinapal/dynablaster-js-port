@@ -1,5 +1,3 @@
-define([], function(){
-
 var Color = {
     aliceBlue: "#F0F8FF",
     antiqueWhite: "#FAEBD7",
@@ -143,6 +141,5 @@ var Color = {
     yellowGreen: "#9ACD32"
 };
 
-return Color;
-
-});
+var exported_Color = Color;
+export { exported_Color as Color };
