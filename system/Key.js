@@ -1,5 +1,3 @@
-define([], function(){
-
 var Key = {
     none: 0,
     back: 8,
@@ -48,6 +46,5 @@ var Key = {
     divide: 47
 };
 
-return Key;
-
-});
+var exported_Key = Key;
+export { exported_Key as Key };

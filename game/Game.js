@@ -1,12 +1,16 @@
-define(['system/myHelper', 'system/GameStateManager', 'system/Canvas', 'system/Sprites', 'system/Sounds', 'game/Map', 'system/Vector2', 'system/Keyboard', 'system/Key', 'game/GamePlayer',
-		'game/DashBoard', 'system/Rectangle', 'game/Bonus',
-		'game/states/PlayingState', 'game/states/TitlePageState', 'game/states/GameOverState',
-		'game/states/StageNumberState', 'game/states/PauseState', 'game/states/HiScore'],
-	function(myHelper, GameStateManager, Canvas, sprites, sounds, Map, Vector2, keyboard, Key, GamePlayer,
-			DashBoard, Rectangle, Bonus,
-			PlayingState, TitlePageState, GameOverState,
-			StageNumberState, PauseState, HiScore
-			){
+import { Key } from "..\\system\\Key.js";
+import { keyboard } from "..\\system\\Keyboard.js";
+import { sounds } from "..\\system\\Sounds.js";
+import { sprites } from "..\\system\\Sprites.js";
+import { HiScore } from ".\\states\\HiScore.js";
+import { PauseState } from ".\\states\\PauseState.js";
+import { StageNumberState } from ".\\states\\StageNumberState.js";
+import { GameOverState } from ".\\states\\GameOverState.js";
+import { TitlePageState } from ".\\states\\TitlePageState.js";
+import { PlayingState } from ".\\states\\PlayingState.js";
+import { Vector2 } from "..\\system\\Vector2.js";
+import { GameStateManager } from "..\\system\\GameStateManager.js";
+import { canvas } from "..\\main.js";
 
 function Game ()
 	{
@@ -173,52 +177,51 @@ Game.prototype.restartMap = function (type) {
 		}
 	};
 
-	Game.prototype.handleInput = function (type) {
-		if (keyboard.pressed(Key.S))
-			{
-				sounds.soundsChange();
-				this.gamePlayer.updateSounds();
-			}
+Game.prototype.handleInput = function (type) {
+    if (keyboard.pressed(Key.S))
+        {
+            sounds.soundsChange();
+            this.gamePlayer.updateSounds();
+        }
 
-		if (keyboard.pressed(Key.H))
-			{
-			this.gameStateManager.switchTo("hi_score").reset();
-			}
-		//
-		if (keyboard.pressed(Key.P) && this.gameStateManager.getLastMasterStateId() === "game_state_playing")
-			{
-			this.gameStateManager.switchTo('game_pause');
-			}
+    if (keyboard.pressed(Key.H))
+        {
+        this.gameStateManager.switchTo("hi_score").reset();
+        }
+    //
+    if (keyboard.pressed(Key.P) && this.gameStateManager.getLastMasterStateId() === "game_state_playing")
+        {
+        this.gameStateManager.switchTo('game_pause');
+        }
 
-		if (keyboard.pressed(Key.Q) && this.gameStateManager.getLastMasterStateId() === "game_state_playing")
-			{
-			this.gameStateManager.switchTo('game_over').reset();
-			}
+    if (keyboard.pressed(Key.Q) && this.gameStateManager.getLastMasterStateId() === "game_state_playing")
+        {
+        this.gameStateManager.switchTo('game_over').reset();
+        }
 
-		if (keyboard.pressed(Key.escape))
-			{
-			this.gameStateManager.escape();
-			}
-
-
-	};
-
-	Game.prototype.mainLoop = function () {
-		var delta = 1 / 60;
-		if (this.gameStateManager.getCurrentGameStateId() !== "game_over")
-			{
-				this.handleInput();
-			}
-		this.gameStateManager.handleInput(delta);
-		this.gameStateManager.update(delta);
-		canvas.clear();
-		this.gameStateManager.draw();
-		keyboard.reset();
-		requestAnimationFrame(this.mainLoop.bind(this));
-	};
+    if (keyboard.pressed(Key.escape))
+        {
+        this.gameStateManager.escape();
+        }
 
 
+};
 
-	return Game;
+Game.prototype.mainLoop = function () {
+    var delta = 1 / 60;
+    if (this.gameStateManager.getCurrentGameStateId() !== "game_over")
+        {
+            this.handleInput();
+        }
+    this.gameStateManager.handleInput(delta);
+    this.gameStateManager.update(delta);
+    canvas.clear();
+    this.gameStateManager.draw();
+    keyboard.reset();
+    requestAnimationFrame(this.mainLoop.bind(this));
+};
 
-});
+
+
+var exported_Game = Game;
+export { exported_Game as Game };
