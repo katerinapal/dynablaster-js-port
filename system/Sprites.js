@@ -1,7 +1,4 @@
-define([], function(){
+var sprites = {};
 
-	var sprites = {};
-
-	return sprites;
-
-	});
+var exported_sprites = sprites;
+export { exported_sprites as sprites };
