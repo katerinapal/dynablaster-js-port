@@ -1,8 +1,7 @@
-define([], function(){
-    function ButtonState() {
-        this.down = false;
-        this.pressed = false;
-    }
+function ButtonState() {
+    this.down = false;
+    this.pressed = false;
+}
 
-    return ButtonState;
-});
+var mod_ButtonState = ButtonState;
+export { mod_ButtonState as ButtonState };

@@ -1,28 +1,29 @@
-define(['game/Grid', 'game/Tile', 'system/Canvas', 'system/Sprites', 'system/Vector2'], function(Grid, Tile, canvas, sprites, Vector2){
+import { Vector2 } from "..\\..\\system\\Vector2.js";
+import { Tile } from "..\\Tile.js";
+import { Grid } from "..\\Grid.js";
 
-	function GridGrass (parent, cols, rows, mode)
-	{
-		Grid.call(this, parent, cols, rows, mode);
-		this.level = 0;
-		this.type = "grass";
-	}
+function GridGrass (parent, cols, rows, mode)
+{
+    Grid.call(this, parent, cols, rows, mode);
+    this.level = 0;
+    this.type = "grass";
+}
 
-	GridGrass.prototype = Object.create(Grid.prototype);
+GridGrass.prototype = Object.create(Grid.prototype);
 
-	GridGrass.prototype.fill = function ()
-	{
-		for(var i = 0, len = this.cols * this.rows; i < len; i++)
-		{
-			this.grid[i] = 1;
-			var y = Math.floor(i / this.cols);
-			var x = i % this.cols;
-			this.tiles[i] = new Tile(this, this.type, this.calculateTilePosition(x,y), new Vector2(x,y));
-		}
-		this.count = this.cols * this.rows;
-	}
+GridGrass.prototype.fill = function ()
+{
+    for(var i = 0, len = this.cols * this.rows; i < len; i++)
+    {
+        this.grid[i] = 1;
+        var y = Math.floor(i / this.cols);
+        var x = i % this.cols;
+        this.tiles[i] = new Tile(this, this.type, this.calculateTilePosition(x,y), new Vector2(x,y));
+    }
+    this.count = this.cols * this.rows;
+}
 
 
 
-	return GridGrass;
-
-});
+var mod_GridGrass = GridGrass;
+export { mod_GridGrass as GridGrass };
